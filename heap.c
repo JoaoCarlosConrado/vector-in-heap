@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include "heap.h"
 
-HEAP* HEAP_create(int n, COMP* compara){
+HEAP* HEAP_create(int n, COMP* compara){//Cria um heap
     HEAP* heap = malloc(sizeof(HEAP));
     heap->comparador = compara;
-    heap->N = n;
-    heap->P = 0;
+    heap->N = n;//Quantidade Máxima da heap
+    heap->P = 0;//Quantidade de elementos na heap
     heap->elems = malloc(n * sizeof(void *));
-    for(int i = 0;i<n;i++){
+    for(int i = 0;i<n;i++){//zera todas as posições da heap
         heap->elems[i] = NULL;
     }
     return heap;
 }
 
-void HEAP_add(HEAP* vetor, void* newelem){
+void HEAP_add(HEAP* vetor, void* newelem){//adiciona no heap
     if(vetor->P < vetor->N){
-        if(vetor->P == 0){
+        if(vetor->P == 0){//coloca na primeira posição da heap se não houver nenhum elemento
             vetor->elems[0] = newelem;
             vetor->P++;
         }
@@ -24,7 +24,7 @@ void HEAP_add(HEAP* vetor, void* newelem){
             vetor->elems[vetor->P] = newelem;
             vetor->P++;
             for(int i=vetor->P-1;i>0;i = i/2){
-                if(vetor->comparador(vetor->elems[i], vetor->elems[i/2]) == 1){
+                if(vetor->comparador(vetor->elems[i], vetor->elems[i/2]) == 1){//verifica onde vai colocar o elemento e faz o swap
                     void* aux = vetor->elems[i];
                     vetor->elems[i] = vetor->elems[i/2];
                     vetor->elems[i/2] = aux;
@@ -34,7 +34,7 @@ void HEAP_add(HEAP* vetor, void* newelem){
     }
 }
 
-void descer(HEAP* veto, int pos){
+void descer(HEAP* veto, int pos){//faz o swap dos elementos para colocar todos os elementos na posição correta
     int P = pos;
     int N = veto->P;
     void** vet = veto->elems;
@@ -56,7 +56,7 @@ void descer(HEAP* veto, int pos){
     }
 }
 
-void* HEAP_remove(HEAP* vetor){
+void* HEAP_remove(HEAP* vetor){//remove na heap
     void* aux = vetor->elems[0];
     vetor->elems[0] = vetor->elems[vetor->P-1];
     vetor->elems[vetor->P-1] = aux;
