@@ -43,7 +43,7 @@ Exemplo de Código que utiliza a biblioteca
 ```
 #include <stdio.h>
 #include <stdlib.h>
-#include "ordvetor.h"
+#include "heap.h"
 
 int comparacao(void* x, void* y){
     if(*(int*)x == *(int*)y){
