@@ -60,21 +60,21 @@ int main(){
     int t = 0;
     printf("Tamanho vetor: ");
     scanf("%d", &t);
-    VETORORD* veto = VETORD_create(t, comp);
+    HEAP* veto = HEAP_create(t, comp);
     int in[90] = {};
     int i = 0;
     while(in[i] >= 0){
         printf("NUM: ");
         scanf("%d", &in[i]);
         if(in[i] >= 0){
-            VETORD_add(veto, &in[i]);
+            HEAP_add(veto, &in[i]);
             i++;
         }
     }
     
     
     //veto->elems[200] = "oi";
-    printf("%d removido\n", *(int*)VETORD_remove(veto));
+    printf("%d removido\n", *(int*)HEAP_remove(veto));
     for(int i = 0;i<veto->P;i++){
         printf("%d ", *(int*)veto->elems[i]);
     }
